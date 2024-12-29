@@ -216,3 +216,7 @@ instance/*
 .webassets-cache
 .env
 
+# VitualEnvs
+venv/
+.venv
+.venv/*
