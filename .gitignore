@@ -225,3 +225,9 @@ venv/
 api/.idea/*
 api/.idea
 .idea/
+
+# Compiled Python files
+*.pyc
+
+# Python Caches
+__pycache__/
