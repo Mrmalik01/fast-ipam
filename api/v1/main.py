@@ -3,4 +3,4 @@ from .pool.main import router as pool_app
 
 router = APIRouter()
 
-router.include_router(pool_app, tags=['Pools'])
+router.include_router(pool_app)
