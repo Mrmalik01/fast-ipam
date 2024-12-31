@@ -34,7 +34,7 @@ class CreateProjectService(CreateModelInterface):
     def _validate(self, project_item: dict, *args, **kwargs):
         _project = NewProject(**project_item)
 
-    def create(self) -> ProjectModel:
+    def create(self) -> Project:
         _id = _generate_unique_id()
         _project_dict = self.request.model_dump()
         _project_dict['project_id'] = _id
@@ -49,4 +49,4 @@ class CreateProjectService(CreateModelInterface):
         except pynamodb.exceptions.PutError as e:
             print("Error: %s", e)
             raise PutOperationException("Error in creating the record in the DynamoDB")
-        return project
+        return Project(**project.get_dict())

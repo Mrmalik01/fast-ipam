@@ -13,9 +13,9 @@ router = APIRouter()
 
 @router.get("/project/{project_id}")
 async def get_project_by_id(project_id: str) -> Project:
-    project = ProjectQuery().get_item_by_pk(project_id)
-    payload = Project(**project.get_dict())
-    return payload
+    ddb_project = ProjectQuery().get_item_by_pk(project_id)
+    project = Project(**ddb_project.get_dict())
+    return project
 
 # @router.get("/pools")
 # async def get_all_pools(limit: int = 10, offset: int = 0):
@@ -29,8 +29,7 @@ async def get_project_by_id(project_id: str) -> Project:
 def create_project(request: CreateProjectRequest) -> Project:
     try:
         project = CreateProjectService(request).create()
-        payload = Project(**project.get_dict())
     except PutOperationException as e:
         return {"message": str(e)}
-    return payload
+    return project
 
