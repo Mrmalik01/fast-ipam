@@ -1,11 +1,18 @@
 from enum import Enum
 import os
 
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
-class ReqEnvs(str, Enum):
-    POOL_TABLE_NAME = os.getenv("POOL_TABLE_NAME")
-    POOL_TABLE_REGION = os.getenv("POOL_TABLE_REGION")
-    RESOURCE_ALLOCATION_TABLE_NAME = os.getenv("RESOURCE_ALLOCATION_TABLE_NAME")
-    RESOURCE_ALLOCATION_TABLE_REGION = os.getenv("RESOURCE_ALLOCATION_TABLE_REGION")
-    AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS")
-    AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET")
+
+class Settings(BaseSettings):
+    pool_table_name: str
+    resource_allocation_table_name: str
+    project_table_name: str
+    project_table_gsi_project_name: str
+    aws_access_key_id: str
+    aws_secret_access_key: str
+
+    model_config = SettingsConfigDict(env_file='.env', env_file_encoding='utf-8')
+
+
+settings = Settings()

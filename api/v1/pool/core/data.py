@@ -1,48 +1,4 @@
 pool_data = {
-    "1": {
-        "pool_id": 1,
-        "metadata:": {
-            "business": "RetailBanking",
-            "management_team_id": "B31923"
-        },
-        "description": "Main pool",
-        "cidr": "10.0.0.10/24",
-        "is_allocated": False,
-        "allocation_id": None,
-        "hierarchy_level": "root",
-        "top_level_pool_id": 1,
-        "parent_pool_id": None,
-        "created_date": "2021-01-01",
-        "updated_date": "2021-01-01",
-        "available_pools": [
-            {
-                "pool_id": 1,
-                "cidr": "10.0.0.0/16"
-            }
-        ]
-    },
-    "2": {
-        "pool_id": 2,
-        "metadata:": {
-            "business": "CorporateBanking",
-            "management_team_id": "Q31923"
-        },
-        "description": "Main pool",
-        "cidr": "10.1.0.10/24",
-        "is_allocated": False,
-        "allocation_id": None,
-        "hierarchy_level": "root",
-        "top_level_pool_id": 2,
-        "parent_pool_id": None,
-        "created_date": "2021-01-01",
-        "updated_date": "2021-01-01",
-        "available_pools": [
-            {
-                "pool_id": 3,
-                "cidr": "10.1.0.0/16"
-            }
-        ]
-    },
     "3": {
         "pool_id": 3,
         "metadata:": {
@@ -51,19 +7,16 @@ pool_data = {
         },
         "description": "Main pool",
         "cidr": "10.1.0.10/28",
-        "is_allocated": False,
-        "allocation_id": None,
         "hierarchy_level": "sub-pool",
-        "top_level_pool_id": 2,
         "parent_pool_id": 2,
         "created_date": "2021-01-01",
         "updated_date": "2021-01-01",
-        "available_pools": [
-            {
-                "pool_id": 3,
-                "cidr": "10.1.0.10/28"
-            }
-        ]
+        "allocated_sub_pools": {
+            "10.1.0.0.10/30": 4
+        },
+        "allocated_resources": {
+            "10.1.0.0.50/32": "R122D32"
+        }
     }
 }
 
@@ -88,11 +41,9 @@ class PoolModel(Model):
     metadata = MapAttribute()
     description = UnicodeAttribute(null=True)
     cidr = UnicodeAttribute(null=False)
-    is_allocated = BooleanAttribute(null=False, default=False)
-    allocation_id = UnicodeAttribute(null=True)
     hierarchy_level = UnicodeAttribute(null=False)
-    top_level_pool_id = UnicodeAttribute(null=False)
     parent_pool_id = UnicodeAttribute(null=True)
+    allocated_sub_pools = MapAttribute()
+    allocated_resources = MapAttribute()
     created_date = UnicodeAttribute(null=False)
     updated_date = UnicodeAttribute(null=False)
-    available_pools = ListAttribute(of=MapAttribute)

@@ -1,0 +1,32 @@
+meta {
+  name: Create Project
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://0.0.0.0:8080/api/v1/projects
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "project_name": "RetailBanking",
+    "description": "IP Address Space Management for RetailBanking Sector",
+    "metadata": {
+      "business": "RetailBanking",
+      "department": "CoreTechnology",
+      "cost-center": "BK214F3",
+      "purpose": "development",
+      "env": "dev"
+    },
+    "is_production_project": false
+  }
+}
+
+body:multipart-form {
+  : @file()
+  : 
+  : @file()
+}

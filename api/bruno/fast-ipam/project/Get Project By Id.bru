@@ -1,0 +1,32 @@
+meta {
+  name: Get Project By Id
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://127.0.0.1:8000/api/v1/project/test-id
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "project_name": "RetailBanking",
+    "description": "IP Address Space Management for RetailBanking Sector",
+    "metadata": {
+      "business": "RetailBanking",
+      "department": "CoreTechnology",
+      "cost-center": "BK214F3",
+      "purpose": "development",
+      "env": "dev"
+    },
+    "is_production_project": false
+  }
+}
+
+body:multipart-form {
+  : @file()
+  : 
+  : @file()
+}
