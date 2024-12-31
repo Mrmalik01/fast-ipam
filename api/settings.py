@@ -11,6 +11,8 @@ class Settings(BaseSettings):
     project_table_gsi_project_name: str
     aws_access_key_id: str
     aws_secret_access_key: str
+    aws_region: str
+    env: str
 
     model_config = SettingsConfigDict(env_file='.env', env_file_encoding='utf-8')
 

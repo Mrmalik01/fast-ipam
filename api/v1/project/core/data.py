@@ -22,10 +22,12 @@ class ProjectModel(Model):
     """
     class Meta:
         table_name = settings.project_table_name
-        # # region = ReqEnvs.AWS_REGION.value
-        # aws_access_key_id = settings.aws_access_key_id
-        # aws_secret_access_key = settings.aws_secret_access_key
-        host = "http://localhost:8000"
+        if settings.env == "local":
+            host = "http://localhost:8000"
+        else:
+            region = settings.aws_region
+            aws_access_key_id = settings.aws_access_key_id
+            aws_secret_access_key = settings.aws_secret_access_key
 
     project_id = UnicodeAttribute(hash_key=True)
     project_name = UnicodeAttribute(null=True)
